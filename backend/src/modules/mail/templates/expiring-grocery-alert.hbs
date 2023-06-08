@@ -1,0 +1,247 @@
+<!-- //* html 4 doctype -->
+
+<html lang='en'>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-16' />
+    <meta
+      http-equiv='X-UA-Compatible'
+      content='IE=edge'
+      16
+      <meta
+      name='viewport'
+      content='width=device-width, initial-scale=1'
+    />
+
+    <title>Expiring Grocery Alert</title>
+  </head>
+
+  <body
+    style='
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+      font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 24px;
+    '
+  >
+    <center class='wrapper' style='width: 100%; table-layout: fixed;'>
+      <div class='webkit' style='max-width: 600px; background-color: #ffffff;'>
+        <!-- main content -->
+
+        <!-- heading section -->
+        <table
+          class='content'
+          align='center'
+          style='
+            border-spacing: 0;
+            margin: 0 auto;
+            width: 100%;
+            border-spacing: 0;
+            color: #3c3c3b;
+          '
+        >
+          <tr>
+            <td style='padding: 0;'>
+              <table
+                class='content'
+                align='center'
+                style='
+                  color: #3c3c3b;
+                  border-spacing: 0;
+                  width: 100%;
+                  border-spacing: 0;
+                  margin: 0 auto;
+                  padding-left: 32px;
+                  padding-right: 32px;
+                '
+              >
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='28px' class='spacing' style='padding: 0;'></td>
+                </tr>
+
+                <!-- heading -->
+                <tr>
+                  <td
+                    style='
+                      color: #3c3c3b;
+                      font-size: 28px;
+                      text-align: left;
+                      font-weight: bold;
+                      padding: 0;
+                      padding-top: 6px;
+                      padding-bottom: 6px;
+                    '
+                  >
+                    {{heading}}
+                  </td>
+                </tr>
+
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='14px' class='spacing' style='padding: 0;'></td>
+                </tr>
+
+                <!-- heading content -->
+                <tr>
+                  <td
+                    style='
+                      color: #3c3c3b;
+                      font-size: 16px;
+                      text-align: left;
+                      font-weight: 400;
+                      padding: 0;
+                      padding-top: 6px;
+                      padding-bottom: 6px;
+                    '
+                  >
+                    Please go to
+                    <a
+                      href='{{webUrl}}'
+                      target='_blank'
+                      style='color: #2ea664;'
+                    >grocery tracker app</a>
+                    to check your expiring groceries.
+                  </td>
+                </tr>
+
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='26px' class='spacing' style='padding: 0;'></td>
+                </tr>
+
+                <!-- looping grocery groups -->
+                {{#each groceryGroups}}
+
+                  <!-- content, item -->
+                  <tr>
+                    <td
+                      style='
+                      color: #3c3c3b;
+                      font-size: 16px;
+                      text-align: left;
+                      font-weight: 400;
+                      padding: 0;
+                      padding-top: 6px;
+                      padding-bottom: 6px;
+                    '
+                    >
+                      <p>{{name}}</p>
+
+                      <p
+                        style='
+                        color: #6b6b6b;'
+                      >
+                        {{groceries.length}}
+                      </p>
+                    </td>
+                  </tr>
+                {{/each}}
+
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='26px' class='spacing' style='padding: 0;'></td>
+                </tr>
+
+                <!-- content, ignore this email -->
+                <tr>
+                  <td
+                    style='
+                      color: #3c3c3b;
+                      font-size: 16px;
+                      text-align: left;
+                      font-weight: 400;
+                      padding: 0;
+                      padding-top: 6px;
+                      padding-bottom: 6px;
+                    '
+                  >
+                    If you didn't request this email, there's nothing to worry
+                    about — you can safely ignore it.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- divider section-->
+          <tr>
+            <td style='padding: 0;'>
+              <table
+                class='content'
+                align='center'
+                style='
+                  border-spacing: 0;
+                  margin: 0 auto;
+                  width: 100%;
+                  border-spacing: 0;
+                  color: #3c3c3b;
+                '
+              >
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='28px' class='spacing' style='padding: 0;'></td>
+                </tr>
+
+                <!-- divider -->
+                <tr>
+                  <td
+                    height='1px'
+                    width='100%'
+                    class='spacing'
+                    style='
+                      border-bottom: 1px solid #ebebed;
+                      width: 100%;
+                      padding: 0;
+                    '
+                  ></td>
+                </tr>
+
+                <!-- empty spacing, br -->
+                <tr>
+                  <td height='28px' class='spacing' style='padding: 0;'></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- footer section-->
+          <tr>
+            <td style='padding: 0;'>
+              <table
+                class='content'
+                align='center'
+                style='
+                  color: #3c3c3b;
+                  border-spacing: 0;
+                  width: 100%;
+                  border-spacing: 0;
+                  margin: 0 auto;
+                  padding-left: 48px;
+                  padding-right: 48px;
+                  text-align: center;
+                '
+              >
+                <tr>
+                  <td
+                    style='
+                      color: #3c3c3b;
+                      font-size: 14px;
+                      text-align: center;
+                      padding: 0;
+                      padding-top: 6px;
+                      padding-bottom: 6px;
+                    '
+                  >
+                    Grocery Tracker
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </center>
+  </body>
+</html>

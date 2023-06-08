@@ -1,0 +1,116 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+  pull_request:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Deploy to heroku
+        uses: akhileshns/heroku-deploy@v3.12.13
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+        env:
+          HD_DATABASE_TYPE: ${{secrets.DATABASE_TYPE}}
+          HD_DATABASE_HOST: ${{secrets.DATABASE_HOST}}
+          HD_DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+          HD_DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+          HD_DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          HD_DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+
+          HD_MAIL_HOST: ${{secrets.MAIL_HOST}}
+          HD_MAIL_USER: ${{secrets.MAIL_USER}}
+          HD_MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+          HD_MAIL_FROM: ${{secrets.MAIL_FROM}}
+
+          HD_WEB_URL: ${{secrets.WEB_URL}}
+
+          HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
+          HD_JWT_EXP: ${{secrets.JWT_EXP}}
+
+          HD_GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+          HD_GOOGLE_SECRET: ${{secrets.GOOGLE_SECRET}}
+
+          HD_VERYFI_CLIENT_ID: ${{secrets.VERYFI_CLIENT_ID}}
+          HD_VERYFI_USERNAME: ${{secrets.VERYFI_USERNAME}}
+          HD_VERYFI_API_KEY: ${{secrets.VERYFI_API_KEY}}
+
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ${{ secrets.AWS_REGION }}
+
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
+
+  #     - name: Build, tag, and push image to Amazon ECR
+  #       id: build-image
+  #       env:
+  #         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+  #         ECR_REPOSITORY: grocery-tracker-app
+  #         # IMAGE_TAG: ${{ github.run_number }}
+  #         IMAGE_TAG: latest
+  #       run: |
+  #         # Build a docker container and
+  #         # push it to ECR so that it can
+  #         # be deployed to ECS.
+
+  #         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+  #         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Connect to instance to pull & run image
+  #       uses: appleboy/ssh-action@master
+  #       env:
+  #         DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
+  #         DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+  #         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+  #         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+  #         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+  #         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+
+  #         JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  #         JWT_EXP: ${{ secrets.JWT_EXP }}
+
+  #       with:
+  #         host: ${{ secrets.INSTANCE_IP }}
+  #         username: ${{ secrets.INSTANCE_USERNAME }}
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         port: ${{ secrets.INSTANCE_PORT }}
+  #         envs: DATABASE_TYPE,DATABASE_HOST,DATABASE_PORT,DATABASE_USERNAME,DATABASE_PASSWORD,DATABASE_NAME,JWT_SECRET,JWT_EXP
+  #         script: |
+  #           # setup env file & rewrite variables
+
+  #           touch .env
+
+  #           arr=("DATABASE_TYPE=$DATABASE_TYPE" "DATABASE_HOST=$DATABASE_HOST" "DATABASE_PORT=$DATABASE_PORT" "DATABASE_USERNAME=$DATABASE_USERNAME" "DATABASE_PASSWORD=$DATABASE_PASSWORD" "DATABASE_NAME=$DATABASE_NAME" "JWT_SECRET=$JWT_SECRET"  "JWT_EXP=$JWT_EXP");
+
+  #           printf '%s\n' "${arr[@]}" > .env
+
+  #           # deploy latest image & run
+
+  #           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_DOCKER_IMAGE }}
+
+  #           docker pull ${{ secrets.AWS_DOCKER_IMAGE }}
+
+  #           docker stop grocery-tracker-app
+
+  #           docker rm grocery-tracker-app
+
+  #           docker run --name grocery-tracker-app --env-file .env --restart=always -d -it -p 8000:8000 ${{ secrets.AWS_DOCKER_IMAGE }}

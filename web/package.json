@@ -1,0 +1,84 @@
+{
+  "name": "grocery-tracker-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start:dev": "PORT=3000 NODE_ENV=development react-app-rewired start",
+    "start": "NODE_ENV=production react-app-rewired start",
+    "build": "CI=false NODE_ENV=production react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{json,md,ts,tsx}": [
+      "prettier --write"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@hookform/resolvers": "^3.1.0",
+    "@react-oauth/google": "^0.11.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@tremor/react": "^2.9.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
+    "axios": "^1.4.0",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.6",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.221.0",
+    "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
+    "react-click-away-listener": "^2.2.3",
+    "react-countup": "^6.4.2",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
+    "react-hot-toast": "^2.4.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "5.0.1",
+    "react-tailwindcss-datepicker": "^1.6.1",
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@types/lodash": "^4.14.195",
+    "autoprefixer": "^10.4.14",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "postcss": "^8.4.24",
+    "prettier": "^2.8.8",
+    "react-app-rewire-alias": "^1.1.7"
+  }
+}
